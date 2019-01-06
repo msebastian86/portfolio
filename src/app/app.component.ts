@@ -25,13 +25,13 @@ export class AppComponent implements AfterViewInit, OnInit {
     // ======---====== get data for svg chart ======---======
     this.iconsData = this.pageData.getChartData();
 
-    // init tooltips from bootstrap
+    // ======---====== init tooltips from bootstrap ======---======
     $('[data-toggle="tooltip"]').tooltip();
 
-    // tomtom map options
+    // ======---====== tomtom map options ======---======
     const map = tomtom.L.map('map', {
       key: 'Gr8VhNU45tscqiW8AYSPAco8qA9TqcdD',
-      basePath: '../assets/sdk',
+      basePath: 'https://msebastian86.github.io/portfolio/assets/sdk',
       style: 'night',
       layer: 'basic',
       center: [ 50.05472, 19.95783 ],
@@ -85,5 +85,13 @@ export class AppComponent implements AfterViewInit, OnInit {
     // ======---====== init interactive SVG Chart ======---======
     InteractiveChart(this.iconsData);
 
+    // ======---====== random Cat :P ======---======
+    fetch('https://api.thecatapi.com/api/images/get?format=json&results_per_page=3')
+      .then(response => response.json())
+      .then(resp => {
+        resp.forEach(cat => {
+          $('.add-cat').append(`<div class="col-sm-4"><img src="${cat.url}" style="height:200px; max-width: 100%;"/></div>`);
+        });
+      });
   }
 }

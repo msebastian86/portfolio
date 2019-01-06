@@ -308,6 +308,18 @@
 
     @include media-breakpoint-up(lg) {
         #svg-chart {
+            max-width: 80%;
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        #svg-chart {
+            max-width: 75%;
+        }
+    }
+
+    @include media-breakpoint-up(xxl) {
+        #svg-chart {
             max-width: 90%;
         }
     }
