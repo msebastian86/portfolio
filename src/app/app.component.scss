@@ -1,0 +1,355 @@
+@import '../assets/styles/my-variables';
+@import '../assets/styles/bootstrap/bootstrap-grid';
+
+@keyframes append-skill {
+    0% {
+        opacity: 0;
+        transform: translateX(120px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.body-container {
+    .line {
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.07);
+        position: fixed;
+        z-index: 0;
+        left: 0;
+        display: none;
+
+        @include media-breakpoint-up(md) {
+            display: block;
+        }
+    }
+
+
+    .line-1 {
+        top: 16.5%;
+    }
+
+    .line-2 {
+        top: 33.5%;
+    }
+
+    .line-3 {
+        top: 50%;
+    }
+
+    .line-4 {
+        top: 66.5%;
+    }
+
+    .line-5 {
+        top: 83.5%;
+    }
+}
+
+.h-lg-100 {
+    height: 100%;
+}
+
+.swiper-container {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    z-index: 3;
+
+    @include media-breakpoint-up(md) {
+        padding-top: 0;
+        height: 100vh;
+    }
+}
+
+.swiper-slide {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding-top: $menu-height + 35px;
+    opacity: 1;
+    transition: opacity 650ms ease-in-out;
+
+    &:not(.swiper-slide-active) {
+        opacity: 0;
+    }
+
+    @include media-breakpoint-up(md) {
+        padding-top: $menu-height;
+    }
+
+    @include media-breakpoint-up(lg) {
+        padding-top: 0;
+        padding-left: $menu-width + 15px;
+    }
+
+    @include media-breakpoint-up(xl) {
+        padding-left: $menu-width;
+    }
+}
+
+.home {
+    @keyframes behind-box {
+        0% {
+            opacity: 1;
+            color: black;
+        }
+        13.9% {
+            opacity: 1;
+            color: black;
+        }
+        14% {
+            opacity: 0;
+            color: white;
+        }
+        14.9% {
+            opacity: 0;
+            color: white;
+        }
+        15% {
+            opacity: 1;
+            color: black;
+        }
+        22.9% {
+            opacity: 1;
+            color: black;
+        }
+        23% {
+            opacity: 0;
+            color: white;
+        }
+        24.9% {
+            opacity: 0;
+            color: white;
+        }
+        25% {
+            opacity: 1;
+            color: black;
+        }
+        34.9% {
+            opacity: 1;
+            color: black;
+        }
+        35% {
+            opacity: 0;
+            color: white;
+        }
+        39.9% {
+            opacity: 0;
+            color: white;
+        }
+        40% {
+            opacity: 1;
+            color: black;
+        }
+        100% {
+            opacity: 1;
+            color: black;
+        }
+    }
+
+    .quote {
+        span {
+            display: inline-block;
+            position: relative;
+            color: $black;
+            line-height: 1.2;
+            padding: 2px 3px;
+            animation: behind-box 5s infinite linear both;
+
+            &:after {
+                content: '';
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                background: $white;
+                z-index: -1;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+
+        &.quote-2 {
+            span {
+                animation-delay: 3s;
+            }
+        }
+    }
+
+    @include media-breakpoint-only(sm) {
+        .pic {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .pic-race {
+            display: block;
+            margin-left: auto;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        padding-top: 0;
+
+        .pic-race {
+            margin-left: -7.5px;
+        }
+
+        .name {
+            margin-top: -8.5rem;
+        }
+
+        .top-left-col {
+            position: relative;
+            padding-right: 0;
+
+            .pro-txt {
+                margin-top: 0;
+                position: absolute;
+                top: -3rem;
+            }
+        }
+
+        .col-name,
+        .col-quotes {
+            > div {
+                height: 100%;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+
+        .name {
+            margin-top: -9rem;
+        }
+
+        .top-left-col {
+            padding-right: 7.5em;
+
+            .pro-txt {
+                top: -3rem;
+            }
+        }
+
+        .pic-race {
+            margin-left: 0;
+        }
+
+        .pic {
+            height: 33.45vh;
+            width: auto;
+            max-width: none;
+            opacity: 0;
+
+        }
+
+        @keyframes pop-pictures {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        &.swiper-slide-active {
+            .pic {
+                animation: pop-pictures 450ms cubic-bezier(.12,.84,.37,1.59) 500ms 1 forwards normal;
+            }
+
+            .pic-race {
+                animation-delay: 1100ms;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        .name {
+            margin-left: -6rem;
+        }
+    }
+
+    @include media-breakpoint-up(fhd) {
+        .name {
+            margin-left: -12rem;
+            margin-top: -9.15rem;
+        }
+    }
+} // /home
+
+.skills {
+    #svg-chart {
+        position: relative;
+        z-index: 1100;
+        max-width:400px;
+        display: block;
+        margin: 0 auto 0 auto;
+    }
+
+
+    @include media-breakpoint-up(md) {
+        #svg-chart {
+            max-width: 450px;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        #svg-chart {
+            max-width: 90%;
+        }
+    }
+
+    // skills-list in styles.scss
+
+} // /skills
+
+.contact {
+    .fly {
+        &:hover {
+            .ion {
+                color: white;
+                animation: fly-away 500ms ease-in-out forwards;
+            }
+        }
+    }
+
+    #map {
+        height: 100%;
+        width: 100%;
+        min-height: 300px;
+        position: relative;
+        z-index: 900;
+    }
+
+    @keyframes fly-away {
+        0% {
+            transform: translate(0) rotate(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(80px, -50px) rotate(20deg);
+            opacity: 0;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        #map {
+            min-height: 400px;
+        }
+    }
+} // /contact
+
+

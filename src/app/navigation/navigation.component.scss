@@ -1,0 +1,390 @@
+@import '../../assets/styles/my-variables';
+@import '../../assets/styles/bootstrap/bootstrap-grid';
+
+// === Variables =====
+$perspective:     130px;
+$split-position:  49%;
+$split-thickness: 1px;
+$split-color:     rgb(175, 20, 20);
+
+// *********************************************
+// Navigation TOP/SIDE bar - for controls, hamburger etc.
+// *********************************************
+.nav-side {
+    background: $orange;
+    color: $black;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: $menu-height;
+    width: 100%;
+    z-index: 1000;
+
+    @include media-breakpoint-up(lg) {
+        background: white url('../../assets/img/gradient-o-w.svg') no-repeat left top;
+        background-size: cover;
+        z-index: 1000;
+        width: $menu-width;
+        height: 100%;
+        text-align: center;
+    }
+}
+
+// *********************************************
+// Navigation content container (visible/hidden element)
+// *********************************************
+
+@keyframes slide-items {
+    0% {
+        transform: translateX(100px) scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.nav-body {
+    position: fixed;
+    left: 0;
+    background: $orange;
+    z-index: 999;
+    width: 0;
+    overflow: hidden;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    transition: all 230ms linear;
+
+    transform-style: preserve-3d;
+    transform: perspective($perspective);
+
+    &.show {
+        .navbar-nav {
+            .nav-item {
+                opacity: 0;
+                animation: slide-items 400ms cubic-bezier(0.23, 1, 0.32, 1) both;
+            }
+
+            @for $i from 1 through 10 {
+                .nav-item:nth-of-type(#{$i}n) {
+                    animation-delay: #{$i * 200}ms;
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        transition: height 230ms cubic-bezier(.19,1,.22,1) 0;
+        width: 100%;
+        height: 0;
+        top: $menu-height;
+
+        &.collapsed {
+            transform: none;
+            width: 0;
+        }
+
+        &.show {
+            transform: none;
+            height: 100%;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        transition: width 230ms cubic-bezier(.19,1,.22,1) 0;
+        top: 0;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+
+        &.collapsed {
+            transform: none;
+            width: 0;
+        }
+
+        &.show {
+            transform: none;
+            width: 100%;
+        }
+    }
+}
+
+// *********************************************
+// Slide nav-body (nav container) in/out
+// *********************************************
+
+@keyframes slide-up {
+    0% {
+        height: 100%;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+@keyframes slide-left {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+// *********************************************
+// Navigation itself - UL list
+// *********************************************
+
+.navbar-nav {
+    line-height: 1.2;
+    font-size: 33px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotateX(-10deg) rotateY(20deg); // overwritten by JS
+    padding-bottom: $menu-height;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-kerning: normal;
+    -webkit-text-size-adjust: 100%;
+
+    .nav-item {
+        position: relative;
+        color: transparent;
+        cursor: pointer;
+        margin: 5px auto;
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        // === Split Line =====
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: $split-position;
+            left: -10%;
+            right: -10%;
+            height: $split-thickness;
+            border-radius: $split-thickness;
+            margin-top: -($split-thickness / 2);
+            background: $split-color;
+            transform: scale(0);
+            transition: transform .8s cubic-bezier(.16,1.08,.38,.98);
+            z-index: 1;
+        }
+    }
+
+    .mask {
+        display: block;
+        position: absolute;
+        overflow: hidden;
+        color: black;
+        top: 0;
+        height: $split-position;
+        transition: all .8s cubic-bezier(.16,1.08,.38,.98);
+
+        span { display: block; }
+    }
+
+    // === Bottom mask specific =====
+    .mask + .mask {
+        top: $split-position - 0.1;
+        height: 100 - $split-position + 0.1;
+
+        span { transform: translateY(-$split-position); }
+    }
+
+    // === Where the fun stuff happens =====
+    .nav-item:hover,
+    .nav-item:active {
+        .mask { color: $white; transform: skewX(-18deg) translateX(5px); }
+        a { color: $white; }
+        .mask + .mask { transform: skewX(18deg) translateX(-1px) translateY(2px); }
+
+        &:before { transform: scale(1); }
+    }
+
+    @include media-breakpoint-up(lg) {
+        padding-bottom: 0;
+        padding-left: $menu-width;
+        font-size: 40px;
+    }
+
+}
+
+// *********************************************
+// Hamburger toggle icon
+// *********************************************
+
+.navbar-toggle-arrow {
+    display: block;
+    border: none;
+    background: #0000 !important;
+    position: relative;
+    transition: all 100ms;
+    margin: 8px 15px 8px 0px;
+    padding: 9px 10px 11px 7px;
+
+    @include media-breakpoint-up(lg) {
+        padding: 9px 10px 11px 10px;
+        margin: 10px auto;
+    }
+
+    .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        -webkit-transition: all 200ms;
+        transition: all 200ms;
+        border-radius: 1px;
+        margin-top: 4px;
+        background-color: #000000;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        @include media-breakpoint-up(lg) {
+            .icon-bar {
+                &:nth-of-type(1) {
+                    transform: translate3d(11px,6px,0) rotate(45deg);
+                    transform-origin: right top;
+                    width: 11px;
+                }
+
+                &:nth-of-type(2) {
+                    transform: translate3d(0,0,0) rotate(0deg);
+
+                }
+                &:nth-of-type(3) {
+                    transform: translate3d(11px,-6px,0) rotate(-45deg);
+                    transform-origin: right bottom;
+                    width: 11px;
+                }
+            }
+        }
+    }
+
+    &:focus {
+        outline: none;
+
+    }
+
+    // closed - default state
+    &.collapsed {
+        @include media-breakpoint-up(lg) {
+
+            &:hover {
+                .icon-bar {
+                    &:nth-of-type(1) {
+                        transform: translate3d(11px,6px,0) rotate(-45deg);
+                        transform-origin: right top;
+                    }
+
+                    &:nth-of-type(2) {
+                        transform: translate3d(0,0,0) rotate(0deg);
+
+                    }
+                    &:nth-of-type(3) {
+                        transform: translate3d(11px,-6px,0) rotate(45deg);
+                        transform-origin: right bottom;
+                    }
+                }
+            }
+        }
+    }
+
+    &:not(.collapsed) {
+    }
+}
+
+// *********************************************
+// Pagination on Navbar
+// *********************************************
+
+.pagination {
+    display: inline-block;
+    width: auto;
+    text-align: center;
+
+    @include media-breakpoint-up(lg) {
+        display: block;
+        position: static;
+        align-self: center;
+        transform: translateY(100%);
+    }
+}
+
+// *********************************************
+// Prev/Next buttons on Navbar
+// *********************************************
+
+.page-controls {
+    @include media-breakpoint-up(lg) {
+        display: block;
+        margin: 10px auto;
+    }
+
+    span {
+        font-size: 17px;
+        line-height: 1;
+        padding: 1px 3px;
+        transform: translateY(-25%);
+    }
+}
+
+.page-prev, .page-next {
+    background: transparent;
+    border: none;
+    outline: none;
+    display: inline-block;
+    font-size: 30px;
+    transition: opacity 60ms ease-in-out;
+    line-height: 1;
+    padding: 1px 7px;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}
+
+
