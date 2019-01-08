@@ -193,20 +193,25 @@
         }
     }
 
+    @include media-breakpoint-only(md) {
+        .name {
+            font-size: 43px;
+        }
+    }
+
     @include media-breakpoint-up(md) {
         padding-top: 0;
 
-        .pic-race {
-            margin-left: -7.5px;
+        .name {
+            margin-top: -110px;
         }
 
-        .name {
-            margin-top: -8.5rem;
+        .pic-race {
+            float: right;
         }
 
         .top-left-col {
             position: relative;
-            padding-right: 0;
 
             .pro-txt {
                 margin-top: 0;
@@ -224,21 +229,10 @@
     }
 
     @include media-breakpoint-up(lg) {
-
-        .name {
-            margin-top: -9rem;
-        }
-
         .top-left-col {
-            padding-right: 7.5em;
-
             .pro-txt {
                 top: -3rem;
             }
-        }
-
-        .pic-race {
-            margin-left: 0;
         }
 
         .pic {
@@ -278,14 +272,21 @@
 
     @include media-breakpoint-up(xl) {
         .name {
-            margin-left: -6rem;
+            margin-left: -170px;
+        }
+    }
+
+    @include media-breakpoint-up(xxl) {
+        .name {
+            margin-top: -125px;
+            margin-left: -210px;
+            font-size: 70px;
         }
     }
 
     @include media-breakpoint-up(fhd) {
         .name {
-            margin-left: -12rem;
-            margin-top: -9.15rem;
+            font-size: 75px;
         }
     }
 } // /home
@@ -308,7 +309,13 @@
 
     @include media-breakpoint-up(lg) {
         #svg-chart {
-            max-width: 80%;
+            max-width: 100%;
+        }
+    }
+
+    @include media-breakpoint-only(xl) {
+        .title-animation {
+            font-size: 40px;
         }
     }
 

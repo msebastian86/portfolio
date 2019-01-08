@@ -87,8 +87,8 @@ body {
     h1 { font-size: 1rem * 3.5; }
     h2 { font-size: 1rem * 3; }
     h3 { font-size: 1rem * 2.75; }
-    h4 { font-size: 1rem * 2.5; }
-    h5 { font-size: 1rem * 2.25; }
+    h4 { font-size: 1rem * 2.25; }
+    h5 { font-size: 1rem * 2; }
     h6 { font-size: 1rem * 1.75; }
 
     body {
@@ -100,8 +100,8 @@ body {
     h1 { font-size: 1rem * 4; }
     h2 { font-size: 1rem * 3.25; }
     h3 { font-size: 1rem * 3.0; }
-    h4 { font-size: 1rem * 2.75; }
-    h5 { font-size: 1rem * 2.5; }
+    h4 { font-size: 1rem * 2.25; }
+    h5 { font-size: 1rem * 2; }
     h6 { font-size: 1rem * 2; }
 
     body {
@@ -160,6 +160,22 @@ body {
         display: inline-block;
         float: left;
         margin-left: 0.5em;
+
+        @include media-breakpoint-up(lg) {
+            &:first-of-type {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.text-left {
+    .title-animation {
+        strong {
+            &:first-of-type {
+                margin-left: 0;
+            }
+        }
     }
 }
 

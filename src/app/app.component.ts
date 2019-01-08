@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import Swiper from 'swiper';
 import { PageDataService } from './page-data.service';
-import { InteractiveMenu } from './functions/interactive-menu';
 import { InteractiveChart } from './functions/interactive-chart';
 
 declare let $: any;
@@ -17,8 +16,7 @@ let swiper: any;
 export class AppComponent implements AfterViewInit, OnInit {
   iconsData: any = {};
 
-  constructor(private pageData: PageDataService) {
-  }
+  constructor(private pageData: PageDataService) {}
 
   ngOnInit() {
 
@@ -41,9 +39,6 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-
-    // ======---====== init interactive menu ======---======
-    InteractiveMenu();
 
     // ======---====== init Swiper ======---======
     swiper = new Swiper('.swiper-container', {
@@ -77,7 +72,9 @@ export class AppComponent implements AfterViewInit, OnInit {
       },
       on: {
         slideChange: function (e) {
-          $(this.$wrapperEl).attr('active-index', this.activeIndex);
+          // $(this.$wrapperEl).attr('active-index', this.activeIndex);
+          this.wrapperEl.classList.add(`active-index`);
+          $('.nav-body').collapse('hide');
         },
       }
     });
@@ -86,11 +83,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     InteractiveChart(this.iconsData);
 
     // ======---====== random Cat :P ======---======
-    fetch('https://api.thecatapi.com/api/images/get?format=json&results_per_page=3')
+    fetch('https://api.thecatapi.com/api/images/get?format=json&results_per_page=4')
       .then(response => response.json())
-      .then(resp => {
-        resp.forEach(cat => {
-          $('.add-cat').append(`<div class="col-sm-4"><img src="${cat.url}" style="height:200px; max-width: 100%;"/></div>`);
+      .then(response => {
+        response.forEach(cat => {
+          document.querySelector('.add-cat').insertAdjacentHTML('afterbegin', `<div class="col-sm-6 col-md-3 text-center"><img src="${cat.url}" style="height:210px; max-width: 100%;"/></div>`);
         });
       });
   }
