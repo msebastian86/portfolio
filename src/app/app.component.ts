@@ -72,9 +72,24 @@ export class AppComponent implements AfterViewInit, OnInit {
       },
       on: {
         slideChange: function (e) {
-          // $(this.$wrapperEl).attr('active-index', this.activeIndex);
-          this.wrapperEl.classList.add(`active-index`);
+          // ======---====== mark active slide ======---======
+          // this.wrapperEl.classList.add(`active-index`);
+
+          // ======---====== collapse menu after click ======---======
           $('.nav-body').collapse('hide');
+
+          // ======---====== mark active menu title ======---======
+          const menuItems = document.querySelectorAll('.nav-item');
+
+          menuItems.forEach((menuItem, index) => {
+            if (index == this.realIndex) {
+              menuItems[index].classList.add('nav-item-active');
+            } else {
+              menuItems[index].classList.remove('nav-item-active');
+            }
+          });
+
+
         },
       }
     });

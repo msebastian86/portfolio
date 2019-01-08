@@ -39,8 +39,7 @@ export class ParallaxMenu {
   }
 
   updateMenu() {
-    console.log(this.working);
-    this.menuContainer.addEventListener('mousemove', (e) => {
+    window.addEventListener('mousemove', (e) => {
       // ======---====== if is NOT mobile device - parallax ON ======---======
       if (this.working) {
         this.updateContainerSize();

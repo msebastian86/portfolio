@@ -210,6 +210,12 @@ $split-color:     rgb(175, 20, 20);
             transition: transform .8s cubic-bezier(.16,1.08,.38,.98);
             z-index: 1;
         }
+
+        &.nav-item-active {
+            a {
+                color: white;
+            }
+        }
     }
 
     .mask {
