@@ -93,7 +93,7 @@
 }
 
 .home {
-    @keyframes behind-box {
+    @keyframes flicker-box {
         0% {
             opacity: 1;
             color: black;
@@ -159,7 +159,7 @@
             color: $black;
             line-height: 1.2;
             padding: 2px 3px;
-            animation: behind-box 5s infinite linear both;
+            animation: flicker-box 5s infinite linear both;
 
             &:after {
                 content: '';
@@ -273,11 +273,11 @@
 
         &.swiper-slide-active {
             .pic {
-                animation: pop-pictures 450ms cubic-bezier(.12,.84,.37,1.59) 500ms 1 forwards normal;
+                animation: pop-pictures 450ms cubic-bezier(.12,.84,.37,1.59) 1100ms 1 forwards normal;
             }
 
             .pic-race {
-                animation-delay: 1100ms;
+                animation-delay: 1400ms;
             }
         }
     }
@@ -311,10 +311,13 @@
         margin: 0 auto 0 auto;
     }
 
-
     @include media-breakpoint-up(md) {
         #svg-chart {
             max-width: 450px;
+        }
+
+        .title-animation {
+            font-size: 37px;
         }
     }
 
@@ -339,6 +342,16 @@
     @include media-breakpoint-up(xxl) {
         #svg-chart {
             max-width: 90%;
+        }
+
+        .title-animation {
+            font-size: 45px;
+        }
+    }
+
+    @include media-breakpoint-up(fhd) {
+        .title-animation {
+            font-size: 48px;
         }
     }
 
@@ -378,7 +391,17 @@
     @include media-breakpoint-up(lg) {
         #map {
             min-height: 250px;
-            height: 33vh;
+            height: 50vh;
+        }
+
+        address {
+            margin-right: -10px;
+        }
+    }
+
+    @media screen and (max-height: 800px) {
+        #map {
+            height: 67vh;
         }
     }
 } // /contact

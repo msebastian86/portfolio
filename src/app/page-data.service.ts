@@ -19,7 +19,7 @@ export class PageDataService {
       'aroundCenter': 45,
       'aroundSelf': 0,
       'description': 'Tools',
-      'points': [ 'npm / yarn / composer', 'gulp / webpack', 'Timber', 'Twig', 'Handlebars.js']
+      'points': [ 'Npm / Yarn / Composer', 'Gulp / Webpack', 'Timber', 'Twig', 'Handlebars.js']
     },
     'bulb': {
       'aroundCenter': 90,

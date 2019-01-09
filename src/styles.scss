@@ -143,22 +143,20 @@ body {
 
 .title-animation {
     color: $orange;
-    font-weight: 300;
+    font-weight: bold;
     display: inline-block;
 
     span {
         float: left;
-        transition: all 500ms ease-in-out;
+        transition: all 400ms ease-in-out;
         display: inline-block;
         opacity: 0;
         max-width: 0;
-        color: white;
     }
 
     strong {
-        font-weight: bold;
-        display: inline-block;
         float: left;
+        display: inline-block;
         margin-left: 0.5em;
 
         @include media-breakpoint-up(lg) {
@@ -187,7 +185,7 @@ body {
         }
         @for $i from 1 through 20 {
             span:nth-of-type(#{$i}n) {
-                transition-delay: #{$i * 40}ms;
+                transition-delay: #{300 + $i*10}ms;
             }
         }
     }
