@@ -13,33 +13,21 @@ let swiper: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
   iconsData: any = {};
 
   constructor(private pageData: PageDataService) {}
 
   ngOnInit() {
-
     // ======---====== get data for svg chart ======---======
     this.iconsData = this.pageData.getChartData();
 
     // ======---====== init tooltips from bootstrap ======---======
     $('[data-toggle="tooltip"]').tooltip();
-
-    // ======---====== tomtom map options ======---======
-    const map = tomtom.L.map('map', {
-      key: 'Gr8VhNU45tscqiW8AYSPAco8qA9TqcdD',
-      basePath: 'https://msebastian86.github.io/portfolio/assets/sdk',
-      style: 'night',
-      layer: 'basic',
-      center: [ 50.05472, 19.95783 ],
-      zoom: 12.76,
-      source : 'vector'
-    });
   }
 
   ngAfterViewInit(): void {
-
     // ======---====== init Swiper ======---======
     swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
@@ -89,7 +77,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
           });
 
-
         },
       }
     });
@@ -105,5 +92,16 @@ export class AppComponent implements AfterViewInit, OnInit {
           document.querySelector('.add-cat').insertAdjacentHTML('afterbegin', `<div class="col-sm-6 col-md-3 text-center"><img src="${cat.url}" style="height:210px; max-width: 100%;"/></div>`);
         });
       });
+    
+    // ======---====== tomtom map options ======---======
+    const map = tomtom.L.map('map', {
+      key: 'Gr8VhNU45tscqiW8AYSPAco8qA9TqcdD',
+      basePath: 'https://msebastian86.github.io/portfolio/assets/sdk',
+      style: 'night',
+      layer: 'basic',
+      center: [ 50.05472, 19.95783 ],
+      zoom: 12.76,
+      source : 'vector'
+    });
   }
 }

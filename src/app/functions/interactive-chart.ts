@@ -5,7 +5,7 @@ export function InteractiveChart(iconsData) {
   const data = iconsData;
   const chart = document.querySelector('#svg-chart');
   const icons = document.querySelectorAll('.svg-icon');
-  const chartInside = document.querySelectorAll('#kolko-inside');
+  const chartInside = document.querySelector('#zebatka');
   const activeColor = '#ecc200';
   const defaultColor = '#ffffff';
 
@@ -53,10 +53,10 @@ export function InteractiveChart(iconsData) {
   icons.forEach((item) => {
     item.addEventListener('click', () => {
       const itemRotation = data[item.id];
-
-      TweenMax.to(chart, 2, {rotation: -(itemRotation['aroundCenter']), transformOrigin: 'center center'});
+      TweenMax.to(chart, 2, {rotation: (itemRotation['aroundCenter']), transformOrigin: 'center center'});
+      TweenMax.to(chartInside, 2, {rotation: -(itemRotation['aroundCenter'] * 2), transformOrigin: 'center center'});
       TweenMax.to(item, 2, {rotation: itemRotation['aroundCenter'], transformOrigin: 'center center'});
-      TweenMax.to(chartInside, 2, {rotation: (itemRotation['aroundCenter'] * 2), transformOrigin: 'center center'});
+      
 
       colorizeIcons(item);
       showDescriptionOnPage(data[item.id]);
