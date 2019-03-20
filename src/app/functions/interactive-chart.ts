@@ -45,9 +45,11 @@ export function InteractiveChart(iconsData) {
   };
 
   const scrollToList = () => {
-    $('html, body').animate({
-      scrollTop: $('.skills-list').offset().top - 65
-    }, 700);
+    setTimeout(() => {
+      $('html, body').animate({
+        scrollTop: $('.skills-list').offset().top - 65
+      }, 800);
+    }, 500);
   };
 
   icons.forEach((item) => {
