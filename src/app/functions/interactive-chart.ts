@@ -55,9 +55,11 @@ export function InteractiveChart(iconsData) {
   icons.forEach((item) => {
     item.addEventListener('click', () => {
       const itemRotation = data[item.id];
-      TweenMax.to(chart, 2, {rotation: (itemRotation['aroundCenter']), transformOrigin: 'center center'});
-      TweenMax.to(chartInside, 2, {rotation: -(itemRotation['aroundCenter'] * 2), transformOrigin: 'center center'});
+      
+      TweenMax.to(chart, 2, {rotation: -(itemRotation['aroundCenter']), transformOrigin: 'center center'});
       TweenMax.to(item, 2, {rotation: itemRotation['aroundCenter'], transformOrigin: 'center center'});
+      TweenMax.to(chartInside, 2, {rotation: (itemRotation['aroundCenter'] * 2), transformOrigin: 'center center'});
+
       
 
       colorizeIcons(item);
