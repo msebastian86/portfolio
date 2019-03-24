@@ -2,12 +2,12 @@ import { TweenMax, Elastic } from 'gsap';
 declare let $: any;
 
 export function InteractiveChart(iconsData) {
-  const data = iconsData;
-  const chart = document.querySelector('#svg-chart');
-  const icons = document.querySelectorAll('.svg-icon');
-  const chartInside = document.querySelector('#zebatka');
-  const activeColor = '#ecc200';
-  const defaultColor = '#ffffff';
+  const data = iconsData,
+        chart = document.querySelector('#svg-chart'),
+        icons = document.querySelectorAll('.svg-icon'),
+        chartInside = document.querySelector('#zebatka'),
+        activeColor = '#ecc200',
+        defaultColor = '#ffffff';
 
   const colorizeIcons = (current) => {
     icons.forEach(function (item) {

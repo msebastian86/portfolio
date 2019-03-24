@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import Swiper from 'swiper';
 import { PageDataService } from './page-data.service';
 import { InteractiveChart } from './functions/interactive-chart';
+import { TypingEffects } from './functions/typingEffect';
 
 declare let $: any;
 declare let L: any;
@@ -16,6 +17,8 @@ let swiper: any;
 
 export class AppComponent implements AfterViewInit, OnInit {
   iconsData: any = {};
+  type;
+  types: [];
 
   constructor(private pageData: PageDataService) {}
 
@@ -39,6 +42,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
+    
+    
     // ======---====== init Swiper ======---======
     swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
@@ -70,6 +75,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         prevEl: '.page-prev',
       },
       on: {
+        init: function (e) {
+          let activeSlide = document.querySelector('.swiper-slide-active');
+          let titles = activeSlide.querySelectorAll('.type-js');
+
+          titles.forEach(element => {
+            const el = new TypingEffects({elContainer: element, speed: 120});
+          });
+        },
         slideChange: function (e) {
           // ======---====== mark active slide ======---======
           // this.wrapperEl.classList.add(`active-index`);
@@ -89,8 +102,18 @@ export class AppComponent implements AfterViewInit, OnInit {
           });
 
         },
+        slideChangeTransitionStart: function (e) {
+          let activeSlide = document.querySelector('.swiper-slide-active');
+          let titles = activeSlide.querySelectorAll('.type-js');
+
+          titles.forEach(element => {
+            const el = new TypingEffects({elContainer: element, speed: 120});
+          });
+        }
       }
     });
+
+    
 
     // ======---====== init interactive SVG Chart ======---======
     InteractiveChart(this.iconsData);

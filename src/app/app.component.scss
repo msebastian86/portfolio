@@ -22,7 +22,7 @@
         left: 0;
         display: none;
 
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(lg) {
             display: block;
         }
     }
@@ -73,11 +73,14 @@
         align-content: center;
         align-items: center;
         padding-top: $menu-height + 35px;
+        padding-bottom: 15px;
         opacity: 1;
-        transition: opacity 650ms ease-in-out;
+        height: auto;
+        transition: opacity 650ms ease-in-out, height none;
 
         &:not(.swiper-slide-active) {
             opacity: 0;
+            height: 0;
         }
 
         @include media-breakpoint-up(md) {
@@ -87,6 +90,8 @@
         }
 
         @include media-breakpoint-up(lg) {
+            padding-bottom: 0;
+
             &.home {
                 padding-top: 0;
             }
@@ -203,7 +208,7 @@
     }
 
     @include media-breakpoint-only(md) {
-        .name {
+        .headline {
             font-size: 43px;
         }
     }
@@ -218,7 +223,7 @@
         .col-name {
             position: relative;
 
-            .name {
+            .headline {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
@@ -292,20 +297,20 @@
     }
 
     @include media-breakpoint-up(xl) {
-        .name {
+        .headline {
             margin-left: -170px;
         }
     }
 
     @include media-breakpoint-up(xxl) {
-        .name {
+        .headline {
             margin-left: -210px;
             font-size: 70px;
         }
     }
 
     @include media-breakpoint-up(fhd) {
-        .name {
+        .headline {
             font-size: 75px;
         }
     }

@@ -31,7 +31,7 @@ export class PageDataService {
       'aroundCenter': 135,
       'aroundSelf': 0,
       'description': 'User Experience',
-      'points': [ 'Animation', 'SVG', 'UI']
+      'points': [ 'Animation', 'SVG', 'UI', 'GSAP']
     },
     'dna': {
       'aroundCenter': 180,
@@ -55,7 +55,7 @@ export class PageDataService {
       'aroundCenter': 315,
       'aroundSelf': 0,
       'description': 'Back-End',
-      'points': [ 'PHP', 'MySQL']
+      'points': [ 'Apache', 'PHP', 'MySQL']
     }
   };
 
