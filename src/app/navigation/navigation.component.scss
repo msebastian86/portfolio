@@ -21,12 +21,11 @@ $split-color:     rgb(175, 20, 20);
     top: 0;
     height: $menu-height;
     width: 100%;
-    z-index: 1000;
+    z-index: 10001;
 
     @include media-breakpoint-up(lg) {
         background: white url('../../assets/img/gradient-o-w.svg') no-repeat left top;
         background-size: cover;
-        z-index: 1000;
         width: $menu-width;
         height: 100%;
         text-align: center;
@@ -54,26 +53,45 @@ $split-color:     rgb(175, 20, 20);
     }
 }
 
-.nav-body {
+#nav-main.nav-body {
     position: fixed;
     left: 0;
     background: $orange;
-    z-index: 999;
-    width: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 0;
     overflow: hidden;
     display: flex;
     align-content: center;
     align-items: center;
-    transition: all 230ms linear;
-
+    transition: height 180ms ease-in-out;
     transform-style: preserve-3d;
     transform: perspective($perspective);
 
-    &.show {
+    &.collapsing {
+        width: 100%!important;
+
         .navbar-nav {
+            display: none;
+        }
+    }
+
+    &.collapse {
+        .navbar-nav {
+            display: none;
+        }
+    }
+
+    &.show {
+        width: 100%;
+        height: 100%;
+
+        .navbar-nav {
+            display: flex;
+
             .nav-item {
                 opacity: 0;
-                animation: slide-items 400ms cubic-bezier(0.23, 1, 0.32, 1) both;
+                animation: slide-items 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
             }
 
             @for $i from 1 through 10 {
@@ -85,12 +103,11 @@ $split-color:     rgb(175, 20, 20);
     }
 
     @include media-breakpoint-down(md) {
-        transition: height 230ms cubic-bezier(.19,1,.22,1) 0;
         width: 100%;
         height: 0;
         top: $menu-height;
 
-        &.collapsed {
+        &.collapsing {
             transform: none;
             width: 0;
         }
@@ -102,21 +119,21 @@ $split-color:     rgb(175, 20, 20);
     }
 
     @include media-breakpoint-up(lg) {
-        transition: width 230ms cubic-bezier(.19,1,.22,1) 0;
+        transition: width 180ms ease-in-out;
         top: 0;
-        height: 50%;
+        width: 0;
+        height: 50%!important;
         display: flex;
         align-items: center;
         align-content: center;
 
-        &.collapsed {
-            transform: none;
-            width: 0;
-        }
-
         &.show {
             transform: none;
             width: 100%;
+
+            .navbar-nav {
+                display: flex;
+            }
         }
     }
 }
