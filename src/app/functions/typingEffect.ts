@@ -13,19 +13,21 @@ export class TypingEffects {
         this.init();
     }
 
-    init() {        
+    init() {
         this.element.style.display = 'inline-block';
         this.elementInner = this.element.querySelector('.text-js');
         this.elementInner.style.opacity = '0';
+        this.elementInner.style.width = '0';
         console.log(this.element.getAttribute('data-text'));
-    
+
         let text = this.element.getAttribute('data-text');
         text = text.toString().split('');
         let amntOfChars = text.length;
         let newString = '';
-        
+
         setTimeout(() => {
             this.elementInner.style.opacity = '1';
+            this.elementInner.style.width = 'auto';
             this.elementInner.innerHTML = '\u00A0';
 
             for(let i = 0; i < amntOfChars; i++){
@@ -37,9 +39,5 @@ export class TypingEffects {
                 }) (i + 1, text[i]);
             }
         }, 1250);
-    }
-
-    reset() {
-        console.log('reset');
     }
 }

@@ -1,12 +1,6 @@
 @import '../../assets/styles/my-variables';
 @import '../../assets/styles/bootstrap/bootstrap-grid';
 
-// === Variables =====
-$perspective:     130px;
-$split-position:  49%;
-$split-thickness: 1px;
-$split-color:     rgb(175, 20, 20);
-
 // *********************************************
 // Navigation TOP/SIDE bar - for controls, hamburger etc.
 // *********************************************
@@ -35,6 +29,9 @@ $split-color:     rgb(175, 20, 20);
 // *********************************************
 // Navigation content container (visible/hidden element)
 // *********************************************
+
+// === Variables =====
+$perspective:     130px;
 
 @keyframes slide-items {
     0% {
@@ -186,6 +183,13 @@ $split-color:     rgb(175, 20, 20);
 // Navigation itself - UL list
 // *********************************************
 
+// === Variables =====
+$split-position:  49%;
+$split-thickness: 1px;
+$split-color:     rgb(175, 20, 20);
+$nav-color: black;
+$nav-active-color: white;
+
 .navbar-nav {
     line-height: 1.2;
     font-size: 33px;
@@ -205,10 +209,11 @@ $split-color:     rgb(175, 20, 20);
         color: transparent;
         cursor: pointer;
         margin: 5px auto;
+        color: $nav-color;
 
         a {
             text-decoration: none;
-            color: black;
+            color: inherit;
         }
 
         // === Split Line =====
@@ -221,16 +226,18 @@ $split-color:     rgb(175, 20, 20);
             right: -10%;
             height: $split-thickness;
             border-radius: $split-thickness;
-            margin-top: -($split-thickness / 2);
+            margin-top: 0;
             background: $split-color;
             transform: scale(0);
-            transition: transform .8s cubic-bezier(.16,1.08,.38,.98);
+            transition: transform 600ms cubic-bezier(.16,1.08,.38,.98);
             z-index: 1;
         }
 
         &.nav-item-active {
-            a {
-                color: white;
+            color: $nav-active-color;
+
+            .mask {
+                color: $nav-active-color;
             }
         }
     }
@@ -239,10 +246,10 @@ $split-color:     rgb(175, 20, 20);
         display: block;
         position: absolute;
         overflow: hidden;
-        color: black;
+        color: $nav-color;
         top: 0;
         height: $split-position;
-        transition: all .8s cubic-bezier(.16,1.08,.38,.98);
+        transition: all 600ms cubic-bezier(.16,1.08,.38,.98);
 
         span { display: block; }
     }
@@ -250,7 +257,7 @@ $split-color:     rgb(175, 20, 20);
     // === Bottom mask specific =====
     .mask + .mask {
         top: $split-position - 0.1;
-        height: 100 - $split-position + 0.1;
+        height: 100 - $split-position + 0.05;
 
         span { transform: translateY(-$split-position); }
     }
@@ -258,11 +265,19 @@ $split-color:     rgb(175, 20, 20);
     // === Where the fun stuff happens =====
     .nav-item:hover,
     .nav-item:active {
-        .mask { color: $white; transform: skewX(-18deg) translateX(5px); }
-        a { color: $white; }
+        color: transparent;
+
+        .mask { color: $nav-color; transform: skewX(-18deg) translateX(5px); }
         .mask + .mask { transform: skewX(18deg) translateX(-1px) translateY(2px); }
 
         &:before { transform: scale(1); }
+    }
+
+    .nav-item-active:hover,
+    .nav-item-active:active {
+        color: transparent;
+
+        .mask { color: $nav-active-color; }
     }
 
     @include media-breakpoint-up(lg) {

@@ -49,7 +49,7 @@ export class ParallaxMenu {
         dx = e.pageX - this.containerWidth / 2, // X center of menu
         offsetPoster: any = this.menu.getAttribute('data-offset'),
         theta = Math.atan2(dy, dx), // angle between cursor and center in RAD
-        transformPoster = 'translate3d(0, ' + -offsetX * offsetPoster + 'px, 0) rotateX(' + (offsetY * offsetPoster) + 'deg) rotateY(' + (-offsetX * (offsetPoster * 2)) + 'deg)'; // menu transform
+        transformPoster = 'translate3d(0, 0, 0) rotateX(' + (offsetY * offsetPoster) * 0.6 + 'deg) rotateY(' + (-offsetX * (offsetPoster * 2)) * 0.7 + 'deg)'; // menu transform
 
         let angle = theta * 180 / Math.PI - 90; // convert rad in degrees
 

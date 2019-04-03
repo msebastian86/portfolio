@@ -57,7 +57,7 @@
     width: 100%;
     z-index: 3;
     min-height: 100vh;
-    
+
     @include media-breakpoint-up(lg) {
         height: 100vh;
         display: flex;
@@ -91,6 +91,7 @@
 
         @include media-breakpoint-up(lg) {
             padding-bottom: 0;
+            padding-top: 0;
 
             &.home {
                 padding-top: 0;
@@ -98,7 +99,7 @@
 
             padding-left: $menu-width + 15px;
         }
-        
+
         @include media-breakpoint-up(xl) {
             padding-top: 0;
             padding-left: $menu-width;
@@ -367,13 +368,24 @@
         .title-animation {
             font-size: 48px;
         }
-    }
-
-    // skills-list in styles.scss
-
+    }// skills-list in styles.scss
 } // /skills
 
 .contact {
+    address {
+        line-height: 1;
+        display: inline-block;
+
+        a {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        :last-child {
+            margin-bottom: 0;
+        }
+    }
+
     .fly {
         &:hover {
             .ion {
@@ -383,12 +395,9 @@
         }
     }
 
-    #map {
-        height: 100%;
-        width: 100%;
-        min-height: 300px;
-        position: relative;
-        z-index: 900;
+    .img-map {
+        max-width: 300px;
+        border-radius: 50%;
     }
 
     @keyframes fly-away {
@@ -403,9 +412,8 @@
     }
 
     @include media-breakpoint-up(lg) {
-        #map {
-            min-height: 250px;
-            height: 50vh;
+        .img-map {
+            max-width: 360px;
         }
 
         address {
@@ -413,9 +421,9 @@
         }
     }
 
-    @media screen and (max-height: 800px) {
-        #map {
-            height: 67vh;
+    @include media-breakpoint-up(xl) {
+        .img-map {
+            max-width: 400px;
         }
     }
 } // /contact

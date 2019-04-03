@@ -6,7 +6,6 @@ import { TypingEffects } from './functions/typingEffect';
 
 declare let $: any;
 declare let L: any;
-declare let tomtom: any;
 let swiper: any;
 
 @Component({
@@ -17,9 +16,6 @@ let swiper: any;
 
 export class AppComponent implements AfterViewInit, OnInit {
   iconsData: any = {};
-  type;
-  types: [];
-
   constructor(private pageData: PageDataService) {}
 
   ngOnInit() {
@@ -28,22 +24,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     // ======---====== init tooltips from bootstrap ======---======
     $('[data-toggle="tooltip"]').tooltip();
-
-    // ======---====== tomtom map options ======---======
-    const map = tomtom.L.map('map', {
-      key: 'Gr8VhNU45tscqiW8AYSPAco8qA9TqcdD',
-      basePath: 'https://msebastian86.github.io/portfolio/assets/sdk',
-      style: 'night',
-      layer: 'basic',
-      center: [ 50.05472, 19.95783 ],
-      zoom: 12.76,
-      source : 'vector'
-    });
   }
 
   ngAfterViewInit(): void {
-    
-    
     // ======---====== init Swiper ======---======
     swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
@@ -110,10 +93,14 @@ export class AppComponent implements AfterViewInit, OnInit {
             const el = new TypingEffects({elContainer: element, speed: 120});
           });
         }
+      },
+      breakpoints: {
+        // when window width is <= 992px
+        992: {
+          shortSwipes: true,
+        },
       }
     });
-
-    
 
     // ======---====== init interactive SVG Chart ======---======
     InteractiveChart(this.iconsData);
