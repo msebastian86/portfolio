@@ -3,6 +3,7 @@
 @import '../node_modules/ionicons/css/ionicons.css';
 @import 'assets/styles/my-variables';
 
+// FONTS ============
 @font-face {
     font-family: 'ProximaNova';
     src:
@@ -109,7 +110,7 @@ body {
     }
 }
 
-
+// Interactive skills list ================
 .skills-list {
     border-left: 2px solid $orange;
     list-style: none;
@@ -140,6 +141,7 @@ body {
     }
 }
 
+// Headlines ==========
 @keyframes flash{
     0%{
         opacity: 1;
@@ -185,4 +187,79 @@ body {
             right: -11px;
         }
     }
+}
+
+// Parallax panel for portfolio ----------------------
+.panel {
+    -moz-user-select: none;
+    display: flex;
+    height: 466px;
+    max-width: 1200px;
+    pointer-events: none;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+
+    &:hover {
+        .panel__img {
+            opacity: 1;
+        }
+    }
+}
+
+.panel__content-col {
+    flex-basis: 25%;
+}
+
+.panel__content {
+    left: 0;
+    position: absolute;
+    top: 26%;
+    width: 100%;
+    z-index: 2;
+}
+
+.panel__text {
+    display: inline-block;
+    text-align: right;
+}
+
+.panel__img-col {
+    flex-basis: 70%;
+}
+
+.panel__title {
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
+}
+
+.panel__addr {
+    -moz-box-pack: end;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0;
+    position: relative;
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.7);
+}
+
+.panel__line {
+    background-color: rgb(255, 255, 255);
+    height: 2px;
+    margin: 25px 0 0 36%;
+    width: 64%;
+    box-shadow: 3px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+.panel__img-col {
+    width: 100%;
+}
+
+.panel__img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    opacity: 0.3;
+    transition: opacity 100ms ease-in-out;
 }

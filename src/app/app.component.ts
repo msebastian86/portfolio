@@ -3,6 +3,7 @@ import Swiper from 'swiper';
 import { PageDataService } from './page-data.service';
 import { InteractiveChart } from './functions/interactive-chart';
 import { TypingEffects } from './functions/typingEffect';
+import { ParallaxPanel } from './functions/parallax-panel';
 
 declare let $: any;
 declare let L: any;
@@ -11,9 +12,8 @@ let swiper: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-
 export class AppComponent implements AfterViewInit, OnInit {
   iconsData: any = {};
   constructor(private pageData: PageDataService) {}
@@ -37,6 +37,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       shortSwipes: false,
       longSwipesRatio: 0.1,
       longSwipesMs: 100,
+      mousewheel: true,
       grabCursor: true,
       hashNavigation: {
         replaceState: true,
@@ -48,9 +49,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         el: '.pagination',
         clickable: true,
         type: 'custom',
-        renderCustom: function (swiper, current, total) {
+        renderCustom: function(swiper, current, total) {
           return current + ' / ' + total;
-        }
+        },
       },
       keyboard: true,
       navigation: {
@@ -58,15 +59,15 @@ export class AppComponent implements AfterViewInit, OnInit {
         prevEl: '.page-prev',
       },
       on: {
-        init: function (e) {
+        init: function(e) {
           let activeSlide = document.querySelector('.swiper-slide-active');
           let titles = activeSlide.querySelectorAll('.type-js');
 
           titles.forEach(element => {
-            const el = new TypingEffects({elContainer: element, speed: 120});
+            const el = new TypingEffects({ elContainer: element, speed: 120 });
           });
         },
-        slideChange: function (e) {
+        slideChange: function(e) {
           // ======---====== mark active slide ======---======
           // this.wrapperEl.classList.add(`active-index`);
 
@@ -83,35 +84,58 @@ export class AppComponent implements AfterViewInit, OnInit {
               menuItems[index].classList.remove('nav-item-active');
             }
           });
-
         },
-        slideChangeTransitionStart: function (e) {
+        slideChangeTransitionStart: function(e) {
           let activeSlide = document.querySelector('.swiper-slide-active');
           let titles = activeSlide.querySelectorAll('.type-js');
 
           titles.forEach(element => {
-            const el = new TypingEffects({elContainer: element, speed: 120});
+            const el = new TypingEffects({ elContainer: element, speed: 120 });
           });
-        }
+        },
       },
       breakpoints: {
         // when window width is <= 992px
         992: {
           shortSwipes: true,
         },
-      }
+      },
     });
 
     // ======---====== init interactive SVG Chart ======---======
     InteractiveChart(this.iconsData);
 
     // ======---====== random Cat :P ======---======
-    fetch('https://api.thecatapi.com/api/images/get?format=json&results_per_page=4')
+    fetch(
+      'https://api.thecatapi.com/api/images/get?format=json&results_per_page=4'
+    )
       .then(response => response.json())
       .then(response => {
         response.forEach(cat => {
-          document.querySelector('.add-cat').insertAdjacentHTML('afterbegin', `<div class="col-sm-6 col-md-3 text-center"><img src="${cat.url}" style="height:210px; max-width: 100%;"/></div>`);
+          document
+            .querySelector('.add-cat')
+            .insertAdjacentHTML(
+              'afterbegin',
+              `<div class="col-sm-6 col-md-3 text-center"><img src="${cat.url}" style="height:210px; max-width: 100%;"/></div>`
+            );
         });
       });
+
+    // ===========---========== Portfolio parallax panel
+    ParallaxPanel();
+
+    // ===========---========== Slider for portfolio
+
+    // var portfolio = new Swiper(".swiper-container__portfolio", {
+    //   direction: "vertical",
+    //   slidesPerView: 1,
+    //   spaceBetween: 30,
+    //   mousewheelControl: true,
+    //   loop: true,
+    //   on: {
+    //     init: function(e) {},
+    //     slideChange: function(e) {}
+    //   }
+    // });
   }
 }
